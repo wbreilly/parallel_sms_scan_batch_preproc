@@ -1,4 +1,5 @@
-function [] = preproc_wbr()
+% it's a script now deal with it
+% function [] = preproc_wbr()
 % Walter Reilly's spm preproc script, adapted from Maureen Ritchey
 
 %====================================================================================
@@ -20,8 +21,11 @@ fileType    = 'NII';
 % scriptdir = path to directory housing this script (and auxiliary scripts)
 % QAdir     = Name of output QA directory
 
-dataDir     = '/Users/wbr/walter/fmri/sms_scan_analyses/data_for_spm/batch_preproc_native_8_5_18';
-scriptdir   = '/Users/wbr/walter/fmri/sms_scan_analyses/parallel_sms_scan_batch_preproc'; % fileparts(mfilename('fullpath'));
+dataDir     = '/home/wbreilly/sms_scan_crick/cluster_preproc_native_8_6_18/';
+scriptdir   = '/home/wbreilly/parallel_sms_scan_batch_preproc'; % fileparts(mfilename('fullpath'));
+
+% add spm to path
+addpath /home/wbreilly/matlab_toolboxes/spm12/
 
 
 %-- Info for Subjects
@@ -174,5 +178,4 @@ end % i (subjects)
 
 fprintf('Done preproc script\n')
 diary off
-
-end % main function
+exit

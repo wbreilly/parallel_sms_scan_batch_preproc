@@ -77,6 +77,8 @@ if runflag
     spm_reslice(b.allfiles, which('0'));
 end
 
+keyboard
+
 fprintf('\n--Finding realignmnet files--\n')
 % Get file information for each run & store for future use
 b.meanfunc = spm_select('FPListRec', b.dataDir, ['^mean.*' b.runs{1} '.*bold\.nii']); % mean func is written only for first run

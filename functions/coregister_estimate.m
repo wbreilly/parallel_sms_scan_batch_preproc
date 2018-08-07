@@ -26,7 +26,7 @@ function [b] = coregister_estimate(b)
 %
 
 
-% First re-organize all realigned and resliced files into cell array
+% First re-organize all realigned files into cell array
 b.allfiles = {};
 for i = 1:length(b.runs)
     b.allfiles{i} = cellstr(b.rundir(i).sfiles); 

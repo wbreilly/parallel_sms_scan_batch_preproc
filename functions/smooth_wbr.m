@@ -33,10 +33,10 @@ runflag = 1;
 
 
 % find em
-for irun  = 1:length(b.runs)
-    b.rundir(irun).nfiles = spm_select('ExtFPListRec', b.dataDir, ['^normalize.*'  b.runs{irun} '.*bold\.nii']);
-    fprintf('%02d:   %0.0f normalized files found.\n', irun, length(b.rundir(irun).nfiles))
-end
+% for irun  = 1:length(b.runs)
+%     b.rundir(irun).nfiles = spm_select('ExtFPListRec', b.dataDir, ['^normalize.*'  b.runs{irun} '.*bold\.nii']);
+%     fprintf('%02d:   %0.0f normalized files found.\n', irun, length(b.rundir(irun).nfiles))
+% end
 
         
 % check if smooth already run
@@ -60,8 +60,10 @@ if runflag
         
         %initiate
         % if normalizing, bring back .nfiles
-        matlabbatch{1}.spm.spatial.smooth.data = cellstr(b.rundir(i).nfiles);
-        matlabbatch{1}.spm.spatial.smooth.fwhm = [8 8 8]; % change to 3mm for RSA
+        % make .sfiles for normal full pipeline, .files when skipping
+        % everything
+        matlabbatch{1}.spm.spatial.smooth.data = cellstr(b.rundir(i).sfiles);
+        matlabbatch{1}.spm.spatial.smooth.fwhm = [3 3 3]; % change to 3mm for RSA
         matlabbatch{1}.spm.spatial.smooth.dtype = 0;
         matlabbatch{1}.spm.spatial.smooth.im = 0;
         matlabbatch{1}.spm.spatial.smooth.prefix = 'smoothed_'; % for RSA smoothed_3mm
