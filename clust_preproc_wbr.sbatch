@@ -15,6 +15,6 @@
 
 date 
 hostname
-module load matlab/R2016a # load matlab module 
+module load matlab # load matlab module 
 
 matlab -nodisplay < cluster_parallel_preproc_wbr.m # run matlab script # added srun
