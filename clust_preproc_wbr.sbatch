@@ -7,7 +7,7 @@
 #SBATCH --ntasks=2
 #SBATCH --ntasks-per-node=2
 #SBATCH --time=5-00:00:00
-#SBATCH --mem-per-cpu=3000 # 3gb % spm max mem set at 2.1gb
+#SBATCH --mem-per-cpu=2500 # 3gb % spm max mem set at 2.1gb
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=wbreilly@ucdavis.edu
 
