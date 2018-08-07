@@ -4,9 +4,10 @@
 #SBATCH --output=/home/wbreilly/parallel_sms_scan_batch_preproc/logs/test_preproc_8_6_18.%j.%N.out
 #SBATCH --error=/home/wbreilly/parallel_sms_scan_batch_preproc/logs/test_preproc_8_6_18.%j.%N.err
 #SBATCH --nodes=1
-#SBATCH -c 2
+#SBATCH --ntasks=2
+#SBATCH --ntasks-per-node=2
 #SBATCH --time=5-00:00:00
-#SBATCH --mem-per-cpu=3000 # 3gb % spm mam mem set at 2.1gb
+#SBATCH --mem-per-cpu=3000 # 3gb % spm max mem set at 2.1gb
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=wbreilly@ucdavis.edu
 
