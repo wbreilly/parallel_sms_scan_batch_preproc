@@ -87,13 +87,14 @@ fprintf('Running preproc script')
 %% parallel
 % start the matlabpool with maximum available workers
 % control how many workers by setting ntasks in your sbatch script
-pc = parcluster('local');
-poolobj = parpool(pc, str2num(getenv('SLURM_NTASKS_PER_NODE')));
+pc = parcluster('single_nose');
+poolobj = parpool(pc, 2);
+% poolobj = parpool(pc, str2num(getenv('SLURM_NTASKS_PER_NODE')));
 
 %%
     
     %--Loop over subjects
-parfor i = 3:length(subjects)
+parfor i = 1:2 %length(subjects)
     
     % Define variables for individual subjects - General
     b.curSubj   = subjects{i};
@@ -108,8 +109,6 @@ parfor i = 3:length(subjects)
     b.scriptdir   = scriptdir;
     b.auto_accept = auto_accept;
     b.messages    = sprintf('Messages for subject %s:\n', subjects{i});
-    
-    % Check whether QA has already been run for a subject
     
     % Initialize diary for saving output
     diaryname = fullfile(b.dataDir, 'normalized_preproc_diary_output.txt');
@@ -136,17 +135,17 @@ parfor i = 3:length(subjects)
 %     fprintf('------------------------------------------------------------\n')
 %     fprintf('\n')     
 
-    % run slice time correction
-    fprintf('--Running slicetime correction--\n')
-    [b] = slicetime_correct(b);
-    fprintf('------------------------------------------------------------\n')
-    fprintf('\n')
-   
-    % Run realignment
-    fprintf('--Realigning and reslicing images using spm_realign and spm_reslice--\n')
-    [b] = batch_spm_realign(b);
-    fprintf('------------------------------------------------------------\n')
-    fprintf('\n')
+%     % run slice time correction
+%     fprintf('--Running slicetime correction--\n')
+%     [b] = slicetime_correct(b);
+%     fprintf('------------------------------------------------------------\n')
+%     fprintf('\n')
+%    
+%     % Run realignment
+%     fprintf('--Realigning and reslicing images using spm_realign and spm_reslice--\n')
+%     [b] = batch_spm_realign(b);
+%     fprintf('------------------------------------------------------------\n')
+%     fprintf('\n')
     
 %     Run coregistration (estimate)
     if coreg_flag

@@ -25,7 +25,6 @@ function [b] = coregister_estimate(b)
 %                   the .*\.nii realigned and resliced functional images
 %
 
-
 % First re-organize all realigned files into cell array
 b.allfiles = {};
 for i = 1:length(b.runs)
