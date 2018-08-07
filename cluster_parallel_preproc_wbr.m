@@ -25,7 +25,11 @@ dataDir     = '/home/wbreilly/sms_scan_crick/cluster_preproc_native_8_6_18/';
 scriptdir   = '/home/wbreilly/parallel_sms_scan_batch_preproc'; % fileparts(mfilename('fullpath'));
 
 % add spm to path
-addpath /home/wbreilly/matlab_toolboxes/spm12/
+% this version hasn't been compiled yet
+% addpath /home/wbreilly/matlab_toolboxes/spm12/
+% this is a version jordan compiled. He edited something to do with
+% implicit masking and a .mat default save format
+addpath /group/dml/apps/spm12
 
 
 %-- Info for Subjects
