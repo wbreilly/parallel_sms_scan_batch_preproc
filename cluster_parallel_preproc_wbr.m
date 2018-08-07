@@ -135,17 +135,17 @@ parfor i = 1:2 %length(subjects)
 %     fprintf('------------------------------------------------------------\n')
 %     fprintf('\n')     
 
-%     % run slice time correction
-%     fprintf('--Running slicetime correction--\n')
-%     [b] = slicetime_correct(b);
-%     fprintf('------------------------------------------------------------\n')
-%     fprintf('\n')
-%    
-%     % Run realignment
-%     fprintf('--Realigning and reslicing images using spm_realign and spm_reslice--\n')
-%     [b] = batch_spm_realign(b);
-%     fprintf('------------------------------------------------------------\n')
-%     fprintf('\n')
+     % run slice time correction
+    fprintf('--Running slicetime correction--\n')
+    [b] = slicetime_correct(b);
+    fprintf('------------------------------------------------------------\n')
+    fprintf('\n')
+
+    % Run realignment
+    fprintf('--Realigning and reslicing images using spm_realign and spm_reslice--\n')
+    [b] = batch_spm_realign(b);
+    fprintf('------------------------------------------------------------\n')
+    fprintf('\n')
     
 %     Run coregistration (estimate)
     if coreg_flag

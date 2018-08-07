@@ -64,20 +64,24 @@ end
 % first func in each run. N.B. Filenames must be organized into cell array
 % in order to implement multiple session realignment.
 
-% First re-organize files into cell array
-b.allfiles = {};
-for i = 1:length(b.runs)
-    b.allfiles{i} = b.rundir(i).sfiles; 
-end
-
 % Then run realignment
 if runflag
-    spm_realign(b.allfiles);
-    % which('0') flag creates mean nii and no other images
-    spm_reslice(b.allfiles, which('0'));
+    % First re-organize files into cell array
+    b.allfiles = {};
+    for i = 1:length(b.runs)
+        b.allfiles{i} = b.rundir(i).sfiles; 
+    end
+    
+    % realign
+    try
+        spm_realign(b.allfiles);
+        % which('0') flag creates mean nii and no other images
+        spm_reslice(b.allfiles, which('0'));
+    catch
+        error('Realignment had some trouble :(')
+    end
 end
 
-keyboard
 
 fprintf('\n--Finding realignmnet files--\n')
 % Get file information for each run & store for future use
@@ -91,20 +95,3 @@ for i = 1:length(b.runs)
 end
 
 end % realign function
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

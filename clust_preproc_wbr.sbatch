@@ -1,8 +1,8 @@
 #!/bin/bash -l 
 #
-#SBATCH --job-name=coregstart_preproc_8_7_18
-#SBATCH --output=/home/wbreilly/parallel_sms_scan_batch_preproc/logs/coregstart_preproc_8_7_18.%j.%N.out
-#SBATCH --error=/home/wbreilly/parallel_sms_scan_batch_preproc/logs/coregstart_preproc_8_7_18.%j.%N.err
+#SBATCH --job-name=coregstart2_preproc_8_7_18
+#SBATCH --output=/home/wbreilly/parallel_sms_scan_batch_preproc/logs/coregstart2_preproc_8_7_18.%j.%N.out
+#SBATCH --error=/home/wbreilly/parallel_sms_scan_batch_preproc/logs/coregstart2_preproc_8_7_18.%j.%N.err
 #SBATCH --nodes=1
 #SBATCH -c 2
 #SBATCH --time=5-00:00:00
