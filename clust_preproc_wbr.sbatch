@@ -5,7 +5,7 @@
 #SBATCH --error=/home/wbreilly/parallel_sms_scan_batch_preproc/logs/all_coregstart_preproc_8_7_18.%j.%N.err
 #SBATCH --nodes=1
 #SBATCH -c 26
-#SBATCH -p bigmem
+#SBATCH -p bigmemm
 #SBATCH --time=5-00:00:00
 #SBATCH --mem-per-cpu=2500 # 3gb % spm max mem set at 2.1gb
 #SBATCH --mail-type=ALL
