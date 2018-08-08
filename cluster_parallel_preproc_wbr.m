@@ -47,7 +47,7 @@ addpath /group/dml/apps/spm12
 %
 %  See BIDS format
 
-subjects    = {'s001' 's002' 's003' 's004' 's007' 's008' 's009' 's015' 's016' 's018' 's019'  's020' 's022' 's023' 's024' 's025' 's027' 's028' 's029' 's030' 's032' 's033' 's034' 's035' 's036' 's037' 's038' 's039'}; %
+subjects    = {'s001' 's002' 's003' 's004' 's007' 's008' 's009' 's010' 's011' 's015' 's016' 's018' 's019'  's020' 's022' 's023' 's024' 's025' 's027' 's028' 's029' 's030' 's032' 's033' 's034' 's035' 's036' 's037' 's038' 's039'}; %
 runs        = {'Rifa_1' 'Rifa_2' 'Rifa_3' 'Rifa_4' 'Rifa_5' 'Rifa_6' 'Rifa_7' 'Rifa_8' 'Rifa_9'};  
 
 %-- Auto-accept
@@ -87,14 +87,16 @@ fprintf('Running preproc script')
 %% parallel
 % start the matlabpool with maximum available workers
 % control how many workers by setting ntasks in your sbatch script
-pc = parcluster('single_nose');
-poolobj = parpool(pc, 26);
+
+pc = parcluster('big_mem'); % or 'single_nose'
+poolobj = parpool(pc, 30); % number of subjects/cores. Don't forget to request correct number in sbatch!
+
 % poolobj = parpool(pc, str2num(getenv('SLURM_NTASKS_PER_NODE')));
 
 %%
     
     %--Loop over subjects
-parfor i = 3:length(subjects)
+parfor i = 1:length(subjects)
     
     % Define variables for individual subjects - General
     b.curSubj   = subjects{i};

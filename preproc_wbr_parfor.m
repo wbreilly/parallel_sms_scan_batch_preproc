@@ -12,7 +12,7 @@ function [] = preproc_wbr()
 % SPM). 'DCM' or 'NII'. Note: this QA routine is NOT compatible with
 % .img/.hdr. Please convert .img/.hdr to .nii prior to running routine.
 
-fileType    = 'NII';
+fileType    = 'DCM';
 
 %-- Directory Information
 % Paths to relevant directories.
@@ -39,7 +39,7 @@ scriptdir   = '/Users/wbr/walter/fmri/sms_scan_analyses/parallel_sms_scan_batch_
 %
 %  See BIDS format
 
-subjects    = {'s001' 's002' 's003' 's004' 's007' 's008' 's009' 's015' 's016' 's018' 's019'  's020' 's022' 's023' 's024' 's025' 's027' 's028' 's029' 's030' 's032' 's033' 's034' 's035' 's036' 's037' 's038' 's039'}; %
+subjects    = {'s001' 's002' 's003' 's004' 's007' 's008' 's009' 's010' 's011' 's015' 's016' 's018' 's019'  's020' 's022' 's023' 's024' 's025' 's027' 's028' 's029' 's030' 's032' 's033' 's034' 's035' 's036' 's037' 's038' 's039'}; %
 runs        = {'Rifa_1' 'Rifa_2' 'Rifa_3' 'Rifa_4' 'Rifa_5' 'Rifa_6' 'Rifa_7' 'Rifa_8' 'Rifa_9'};  
 
 %-- Auto-accept
@@ -80,12 +80,12 @@ fprintf('Running preproc script')
 % start the matlabpool with maximum available workers
 % control how many workers by setting ntasks in your sbatch script
 pc = parcluster('local');
-poolobj = parpool(pc, str2num(getenv('SLURM_CPUS_ON_NODE')));
+poolobj = parpool(pc, 2);
 
 %%
     
     %--Loop over subjects
-parfor i = 1:2 %length(subjects)
+parfor i = 8:9 %length(subjects)
     
     % Define variables for individual subjects - General
     b.curSubj   = subjects{i};
@@ -122,35 +122,35 @@ parfor i = 1:2 %length(subjects)
         error('Specify a valid fileType (''DCM'' or ''NII'')');
     end
     
-%     set origin in mprage to AC
-%     fprintf('Set origin to AC!')
-%     [b] = set_origin(b);
-%     fprintf('------------------------------------------------------------\n')
-%     fprintf('\n')     
+    set origin in mprage to AC
+    fprintf('Set origin to AC!')
+    [b] = set_origin(b);
+    fprintf('------------------------------------------------------------\n')
+    fprintf('\n')     
 
     % run slice time correction
-    fprintf('--Running slicetime correction--\n')
-    [b] = slicetime_correct(b);
-    fprintf('------------------------------------------------------------\n')
-    fprintf('\n')
-   
-    % Run realignment
-    fprintf('--Realigning and reslicing images using spm_realign and spm_reslice--\n')
-    [b] = batch_spm_realign(b);
-    fprintf('------------------------------------------------------------\n')
-    fprintf('\n')
+%     fprintf('--Running slicetime correction--\n')
+%     [b] = slicetime_correct(b);
+%     fprintf('------------------------------------------------------------\n')
+%     fprintf('\n')
+%    
+%     % Run realignment
+%     fprintf('--Realigning and reslicing images using spm_realign and spm_reslice--\n')
+%     [b] = batch_spm_realign(b);
+%     fprintf('------------------------------------------------------------\n')
+%     fprintf('\n')
     
 %     Run coregistration (estimate)
-    if coreg_flag
-        fprintf('--Coregistering images--\n')
-        [b] = coregister_estimate(b);
-        fprintf('------------------------------------------------------------\n')
-        fprintf('\n')
-    else
-        fprintf('--Skipping coregistration--\n')
-        fprintf('------------------------------------------------------------\n')
-        fprintf('\n')
-    end
+%     if coreg_flag
+%         fprintf('--Coregistering images--\n')
+%         [b] = coregister_estimate(b);
+%         fprintf('------------------------------------------------------------\n')
+%         fprintf('\n')
+%     else
+%         fprintf('--Skipping coregistration--\n')
+%         fprintf('------------------------------------------------------------\n')
+%         fprintf('\n')
+%     end
     
 %     Run normalization estimate
 %     fprintf('--Normalize estimating--\n')
@@ -165,11 +165,11 @@ parfor i = 1:2 %length(subjects)
 %     fprintf('\n')
     
     % Run smooth
-    fprintf('--Smoothing--\n')
-    [b] = smooth_wbr(b);
-    fprintf('------------------------------------------------------------\n')
-    fprintf('\n')
-    
+%     fprintf('--Smoothing--\n')
+%     [b] = smooth_wbr(b);
+%     fprintf('------------------------------------------------------------\n')
+%     fprintf('\n')
+%     
 end % i (subjects)
 
 fprintf('Done preproc script\n')
