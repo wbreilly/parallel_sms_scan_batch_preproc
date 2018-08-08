@@ -88,13 +88,13 @@ fprintf('Running preproc script')
 % start the matlabpool with maximum available workers
 % control how many workers by setting ntasks in your sbatch script
 pc = parcluster('single_nose');
-poolobj = parpool(pc, 2);
+poolobj = parpool(pc, 26);
 % poolobj = parpool(pc, str2num(getenv('SLURM_NTASKS_PER_NODE')));
 
 %%
     
     %--Loop over subjects
-parfor i = 1:2 %length(subjects)
+parfor i = 3:length(subjects)
     
     % Define variables for individual subjects - General
     b.curSubj   = subjects{i};

@@ -1,10 +1,11 @@
 #!/bin/bash -l 
 #
-#SBATCH --job-name=coregstart2_preproc_8_7_18
-#SBATCH --output=/home/wbreilly/parallel_sms_scan_batch_preproc/logs/coregstart2_preproc_8_7_18.%j.%N.out
-#SBATCH --error=/home/wbreilly/parallel_sms_scan_batch_preproc/logs/coregstart2_preproc_8_7_18.%j.%N.err
+#SBATCH --job-name=all_coregstart_preproc_8_7_18
+#SBATCH --output=/home/wbreilly/parallel_sms_scan_batch_preproc/logs/all_coregstart_preproc_8_7_18.%j.%N.out
+#SBATCH --error=/home/wbreilly/parallel_sms_scan_batch_preproc/logs/all_coregstart_preproc_8_7_18.%j.%N.err
 #SBATCH --nodes=1
-#SBATCH -c 2
+#SBATCH -c 26
+#SBATCH -p bigmem
 #SBATCH --time=5-00:00:00
 #SBATCH --mem-per-cpu=2500 # 3gb % spm max mem set at 2.1gb
 #SBATCH --mail-type=ALL
