@@ -76,7 +76,7 @@ for irun = 1:length(b.runs)
 end
 
 
-% need to convert mprage too
+%% need to convert mprage too
 
 % Check whether there are already nifti files
 ragedir   = fullfile(b.dataDir,'mprage_sag_NS_g3');
@@ -100,4 +100,51 @@ dcmoutput = spm_dicom_convert(dcmhdr, 'all', 'flat', 'nii');
 b.mprage = cell2mat(dcmoutput.files);
 fprintf('%0.0f files converted to nii (mprage).\n', size(b.mprage, 1));
 cd(b.scriptdir);
+
+%% need to convert field maps too
+
+% Check whether there are already nifti files
+fmapdir   = fullfile(b.dataDir,'gre_field_mapping');
+fmaps = spm_select('FPList', fmapdir, '.*\.nii');
+if size(fmaps, 1) > 0
+    fprintf('There are already %0.0f nii files in fmap folder.\n', size(fmaps,1));
+    response = input('Are you sure you want to use dicom files? y/n \n', 's');
+    if strcmp(response,'y') == 1
+        disp('Continuing running dicom conversion')
+    else
+        error('Found NII fmap Change fileType to ''NII''')
+    end
+end
+
+% Convert dicom images
+dcmfiles = spm_select('FPList', fmapdir, '.*dcm');
+dcmhdr    = spm_dicom_headers(dcmfiles);
+cd(fmapdir)
+dcmoutput = spm_dicom_convert(dcmhdr, 'all', 'flat', 'nii');
+b.fmap = cell2mat(dcmoutput.files);
+fprintf('%0.0f files converted to nii (fmap).\n', size(b.fmap, 1));
+cd(b.scriptdir);
+
+% the other one
+fmapdir   = fullfile(b.dataDir,'gre_field_mapping2');
+fmaps = spm_select('FPList', fmapdir, '.*\.nii');
+if size(fmaps, 1) > 0
+    fprintf('There are already %0.0f nii files in fmap folder.\n', size(fmaps,1));
+    response = input('Are you sure you want to use dicom files? y/n \n', 's');
+    if strcmp(response,'y') == 1
+        disp('Continuing running dicom conversion')
+    else
+        error('Found NII fmap Change fileType to ''NII''')
+    end
+end
+
+% Convert dicom images
+dcmfiles = spm_select('FPList', fmapdir, '.*dcm');
+dcmhdr    = spm_dicom_headers(dcmfiles);
+cd(fmapdir)
+dcmoutput = spm_dicom_convert(dcmhdr, 'all', 'flat', 'nii');
+b.fmap = cell2mat(dcmoutput.files);
+fprintf('%0.0f files converted to nii (fmap2).\n', size(b.fmap, 1));
+cd(b.scriptdir);
+
 end
